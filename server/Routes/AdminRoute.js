@@ -24,4 +24,12 @@ router.post("/adminlogin", (req, res) => {
     });
 });
 
-export { router as adminlogin }
+router.get('/category', (req, res) => {
+    const sql = "SELECT * FROM category";
+    db.query(sql, (err, result) => {
+        if (err) return res.json({ Status: false, Error: "Query Error" })
+        return res.json({ Status: true, Result: result })
+    })
+})
+
+export { router as adminRouter }
