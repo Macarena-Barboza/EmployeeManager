@@ -123,5 +123,42 @@ router.delete('/delete_employee/:id', (req, res) => {
 })
 
 
+router.get('/admin_count', (req, res) => {
+    const sql = 'SELECT COUNT(id) as admin FROM admin';
+    db.query(sql, (err, result) => {
+        if (err) return res.json({ Status: false, Error: err })
+        return res.json({ Status: true, Result: result })
+    })
+})
+
+router.get('/employee_count', (req, res) => {
+    const sql = 'SELECT COUNT(id) as employee FROM employee';
+    db.query(sql, (err, result) => {
+        if (err) return res.json({ Status: false, Error: err })
+        return res.json({ Status: true, Result: result })
+    })
+})
+
+router.get('/salary_count', (req, res) => {
+    const sql = 'SELECT SUM(salary) as salaryEmployee FROM employee';
+    db.query(sql, (err, result) => {
+        if (err) return res.json({ Status: false, Error: err })
+        return res.json({ Status: true, Result: result })
+    })
+})
+
+router.get('/admin_records', (req, res) => {
+    const sql = 'SELECT * FROM admin'
+    db.query(sql, (err, result) => {
+        if (err) return res.json({ Status: false, Error: err })
+        return res.json({ Status: true, Result: result })
+    })
+})
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('token')
+    return res.json({ Status: true })
+})
+
 
 export { router as adminRouter }
