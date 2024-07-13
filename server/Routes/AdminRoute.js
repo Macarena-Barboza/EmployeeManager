@@ -89,7 +89,6 @@ router.get('/employee', (req, res) => {
 
 router.get('/employee/:id', (req, res) => {
     const id = req.params.id;
-    console.log(id)
     const sql = "SELECT * FROM employee WHERE id = ?";
     db.query(sql, [id], (err, result) => {
         if (err) return res.json({ Status: false, Error: "Query Error" })
